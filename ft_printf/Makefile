@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbouazao <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 10:02:55 by jbouazao          #+#    #+#              #
-#    Updated: 2019/08/07 13:56:52 by yjouaoud         ###   ########.fr        #
+#    Updated: 2020/02/25 14:34:10 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 SRC_DIR = src
 OBJ_DIR = obj
 OBJ_DIRS = $(OBJ_DIR) $(OBJ_DIR)/f_conv $(OBJ_DIR)/u_conv $(OBJ_DIR)/p_conv
-LIBFT_DIR = libft
+LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INC_DIR = src
 
