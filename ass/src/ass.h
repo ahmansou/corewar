@@ -18,7 +18,7 @@
 
 # include "../../libft/libft.h"
 # include "../../ft_printf/src/ft_printf.h"
-// # include "../../op.h"
+# include "../../op.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -26,19 +26,38 @@
 # include <fcntl.h>
 # include <errno.h>
 
-typedef struct	s_op
-{
-	char		*name;
-	int			carry;
-	char		*desc;
-	
-}				t_op;
+typedef struct		s_op
+{	
+	char			*name;
+	int				arg[3];
+	int				code;
+	int				cycle;
+	char			*desc;
+	int				carry;
+	int				carry1;
+	struct s_op		*next;
+}					t_op;
 
-typedef struct	s_ass_env
+typedef struct		s_ch
 {
-	struct s_op	op[17];
-}				t_ass_env;
+	char			*prog_name;
+	char			*prog_desc;
+}					t_ch;
 
-int				get_next_line(const int fd, char **line);
+typedef struct		s_label
+{
+	char			*label;
+	struct s_op		*op;
+	struct s_label	*next;
+}					t_label;
+
+typedef struct		s_ass_env
+{
+	struct s_op		*op;
+	struct s_label	*labels;
+	struct s_ch		champ;
+}					t_ass_env;
+
+int					get_next_line(const int fd, char **line);
 
 #endif
