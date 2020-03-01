@@ -6,59 +6,86 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 21:20:19 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/02/25 14:45:50 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/02/29 14:52:23 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
-static void	get_line(const int fd, char **tmpfd, char **line)
+static char	*ft_join(char *str, const char *buf)
 {
-	int		i;
-	char	*tmp;
+	char	*res;
 
-	i = 0;
-	while (tmpfd[fd][i] != '\n' && tmpfd[fd][i])
-		i++;
-	if (tmpfd[fd][i] == '\n')
-	{
-		*line = ft_strsub(tmpfd[fd], 0, i);
-		tmp = tmpfd[fd];
-		tmpfd[fd] = ft_strdup(tmp + i + 1);
-		free(tmp);
-	}
-	else if (tmpfd[fd][i] == '\0')
-	{
-		*line = ft_strdup(tmpfd[fd]);
-		tmpfd[fd] = NULL;
-	}
+	res = ft_strjoin(str, buf);
+	free(str);
+	return (res);
 }
 
-int			get_next_line(const int fd, char **line)
+static int	get_next_line(const int fd, char **line)
 {
-	int			r;
-	char		buff[BUFF_SIZE + 1];
-	char		*tmp;
-	static char *tmpfd[FD_LIMIT];
+	char		*str;
+	char		buf[2];
+	size_t		size;
 
-	while ((r = read(fd, buff, BUFF_SIZE)) > 0)
-	{
-		if (!(buff[r] = '\0') && tmpfd[fd] != NULL)
-		{
-			tmp = ft_strdup(tmpfd[fd]);
-			free(tmpfd[fd]);
-		}
-		else
-			tmp = ft_strnew(0);
-		tmpfd[fd] = ft_strjoin(tmp, buff);
-		free(tmp);
-		if (ft_strchr(buff, '\n'))
-			break ;
-	}
-	if (r == 0 && (tmpfd[fd] == NULL || tmpfd[fd][0] == '\0'))
-		return (0);
-	else if (r < 0 || fd < 0 || fd > FD_LIMIT)
+	if (read(fd, buf, 0) < 0)
 		return (-1);
-	get_line(fd, tmpfd, line);
+	ft_bzero(buf, 2);
+	str = ft_strnew(0);
+	while ((size = read(fd, buf, 1)) > 0)
+	{
+		if (*buf == '\n')
+			break ;
+		str = ft_join(str, buf);
+	}
+	if (!*buf)
+	{
+		free(str);
+		return (0);
+	}
+	*line = str;
+	return (1);
+}
+
+static int	insert_line(char *line, t_ass_env *env)
+{
+	t_lines	*new;
+	t_lines	*tmp;
+
+	if (!(new = (t_lines*)malloc(sizeof(t_lines))))
+		return (0);
+	if (!(new->line = ft_strdup(line)))
+		return (0);
+	new->next = NULL;
+	tmp = env->lines;
+	if (env->lines == NULL)
+	{
+		env->lines = new;
+		return (1);
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	return (1);
+}
+
+int 		get_lines(char *filename, t_ass_env *env)
+{
+	char	*line;
+	int		sz;
+	int		fd;
+
+	if (!(fd = open(filename, O_RDONLY)))
+		return (0);
+	while ((sz = get_next_line(fd, &line)))
+	{
+		if (!insert_line(line, env))
+		{
+			ft_strdel(&line);
+			return (0);
+		}
+		ft_strdel(&line);
+	}
+	if (sz < 0)
+		return (0);
 	return (1);
 }

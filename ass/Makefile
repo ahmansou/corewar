@@ -6,13 +6,20 @@
 #    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/02/25 15:01:17 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/03/01 14:54:01 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ass
 
-SRCS =  src/ass.c src/get_next_line.c
+SRCS =  src/ass.c\
+		src/get_next_line.c\
+		src/main.c\
+		src/label.c\
+		src/misc.c\
+		src/parser.c src/parser_misc.c\
+		src/ft_split_whitespaces.c\
+		src/ops.c
 
 OBJS = $(SRCS:.c=.o) 
 

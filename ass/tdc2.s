@@ -8,8 +8,7 @@ begin:
 #	st	r1, :liver2+1	
 #	st	r1, :gen+1
 	
-ld1:	
-	ld	%15, r3 	#offset
+ld1:	ld	%15, r3 	#offset
 	ld	%195, r4	#limit
 	ld	%0, r7		#pattern faites nous confiance
 	ld	%0x00090000, r8	#pattern poison
@@ -82,15 +81,3 @@ toto:
 
 end:	
 	xor r1, r1, r1
-	
-
-
-
-
-
-
-
-
-
-
-
