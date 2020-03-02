@@ -6,16 +6,30 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:24:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/01 15:03:59 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/02 11:59:46 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
 
+
+
+int		get_op_type(char *op)
+{
+	const t_op	*opt;
+	int			i;
+	
+	opt = get_op_tab();
+	i = -1;
+	while (++i < 17)
+		if (!ft_strcmp(op, opt[i].name))
+			return (opt[i].code);
+	return (0);
+}
+
 t_op	*new_op(char *op)
 {
 	t_op		*new;
-	const t_op	*opt;
 	int			code;
 	char		**split;
 	
@@ -24,7 +38,7 @@ t_op	*new_op(char *op)
 	if (!(split = ft_split_whitespaces(op)) || !split[0])
 		return (0);
 	new->name = ft_strdup(split[0]);
-	opt = get_op_tab();
+	new->code = get_op_type(split[0]);
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:46:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/01 13:58:18 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/02 11:36:40 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			main(int argc, char **argv)
 		otmp = ltmp->op;
 		while (otmp)
 		{
-			ft_printf("|%s| ", otmp->name);
+			ft_printf("|%s %d| ", otmp->name, otmp->code);
 			otmp = otmp->next;
 		}
 		ltmp = ltmp->next;
