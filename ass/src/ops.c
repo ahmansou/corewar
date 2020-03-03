@@ -12,7 +12,17 @@
 
 #include "ass.h"
 
-
+int	get_args_live(t_op *op, char **split)
+{
+	if (op->code == 1)
+	{
+		if (!split[0] || !split[1] || (split[2] && split[2][0] != '#'))
+			return (0);
+		if (split[1][0] == '%')
+			op->arg[1] == T_DIR;
+	}
+	return (1);
+}
 
 int		get_op_type(char *op)
 {
@@ -39,6 +49,8 @@ t_op	*new_op(char *op)
 		return (0);
 	new->name = ft_strdup(split[0]);
 	new->code = get_op_type(split[0]);
+	if (!get_args_live(new, split))
+		return (NULL);
 	return (new);
 }
 
@@ -46,6 +58,8 @@ int		add_op(t_ass_env *env, t_label *clabel, t_op *op)
 {
 	t_op	*otmp;
 
+	if (!op)
+		return (0);
 	if (!clabel->op)
 		clabel->op = op;
 	else
