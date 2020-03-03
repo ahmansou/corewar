@@ -6,7 +6,7 @@
 #    By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/25 14:48:59 by ahmansou          #+#    #+#              #
-#    Updated: 2020/03/01 14:54:01 by ahmansou         ###   ########.fr        #
+#    Updated: 2020/03/03 13:12:33 by ahmansou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS =  src/ass.c\
 		src/misc.c\
 		src/parser.c src/parser_misc.c\
 		src/ft_split_whitespaces.c\
-		src/ops.c
+		src/ops.c src/ops_misc.c
 
 OBJS = $(SRCS:.c=.o) 
 

@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:45:49 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/01 14:53:53 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:25:36 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ static int	word_count(char *str)
 		return (0);
 	while (str[i])
 	{
-		while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i])
+		while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i] != SEPARATOR_CHAR && str[i])
 		{
 			i++;
 			is_word = 1;
 		}
-		if (str[i] == '\t' || str[i] == ' ' || str[i] == '\n' || str[i] == '\0')
+		if (str[i] == '\t' || str[i] == ' ' || str[i] == '\n' || str[i] == '\0' ||
+			str[i] == SEPARATOR_CHAR)
 		{
 			if (is_word == 1)
 				wc++;
@@ -46,7 +47,7 @@ static int	wlen(char *str, int i)
 	int lc;
 
 	lc = 0;
-	while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i])
+	while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i] != SEPARATOR_CHAR && str[i])
 	{
 		lc++;
 		i++;
@@ -67,14 +68,15 @@ char		**ft_split_whitespaces(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		while ((str[i] == '\t' || str[i] == ' ' || str[i] == '\n') && str[i])
+		while ((str[i] == '\t' || str[i] == ' ' || str[i] == '\n' || str[i] == SEPARATOR_CHAR) && str[i])
 			i++;
 		if (str[i])
 		{
 			k = 0;
 			if ((arr[j] = malloc(sizeof(char) * wlen(str, i) + 1)) == NULL)
 				return (NULL);
-			while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' && str[i])
+			while (str[i] != '\t' && str[i] != ' ' && str[i] != '\n' &&
+			str[i] != SEPARATOR_CHAR && str[i])
 				arr[j][k++] = str[i++];
 			arr[j++][k] = '\0';
 		}

@@ -6,23 +6,11 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:24:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/02 11:59:46 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:57:48 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ass.h"
-
-int	get_args_live(t_op *op, char **split)
-{
-	if (op->code == 1)
-	{
-		if (!split[0] || !split[1] || (split[2] && split[2][0] != '#'))
-			return (0);
-		if (split[1][0] == '%')
-			op->arg[1] == T_DIR;
-	}
-	return (1);
-}
 
 int		get_op_type(char *op)
 {
@@ -42,15 +30,19 @@ t_op	*new_op(char *op)
 	t_op		*new;
 	int			code;
 	char		**split;
+	t_op_types	o_tps;
 	
+	o_tps = get_o_types();
 	if (!(new = (t_op*)ft_memalloc(sizeof(t_op))))
 		return (0);
 	if (!(split = ft_split_whitespaces(op)) || !split[0])
 		return (0);
 	new->name = ft_strdup(split[0]);
 	new->code = get_op_type(split[0]);
-	if (!get_args_live(new, split))
-		return (NULL);
+	// ft_printf("ok\n");
+	if (new->code >= 1 && new->code <= 2)
+		if (!o_tps.t[new->code - 1](new, split))
+			return (NULL);
 	return (new);
 }
 
