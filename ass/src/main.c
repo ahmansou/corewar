@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:46:28 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/03 16:12:35 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:18:52 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void print_reg(t_op *op)
 {
 	int i;
 	
+	ft_printf("\n\t\t\tREGS %d %d %d\n\t\t\t", op->r, op->r1, op->r2);
 	i = 1;
 	while (i <= REG_NUMBER)
 	{
+		// if (op->r[0] == i)
 		if (op->r == i)
-		// if (op->regs[i])
-			ft_printf("R%d = %d, ", i, op->regs[i - 1]);
+			ft_printf("R%d = %s, ", i, op->regs[i - 1]);
+		if (op->r1 == i)
+			ft_printf("R%d = %s, ", i, op->regs[i - 1]);
+		if (op->r2 == i)
+			ft_printf("R%d = %s, ", i, op->regs[i - 1]);
 		i++;
 	}
 }
@@ -38,6 +43,7 @@ void print_arg(t_op *op)
 {
 	int i;
 
+	ft_putstr("\t\tARGS : ");
 	i = -1;
 	while (++i < 3)
 		if (op->arg[i])
@@ -74,12 +80,10 @@ int			main(int argc, char **argv)
 		otmp = ltmp->op;
 		while (otmp)
 		{
-			ft_printf("\n\t%s {", otmp->name);
-			ft_putstr("\n\t\tARGS : ");
+			ft_printf("\n\t%s", otmp->name);
 			print_arg(otmp);
-			ft_putstr("\n\t\tREGS : ");
 			print_reg(otmp);
-			ft_putendl("\n\t}");
+			ft_putendl("\n");
 			otmp = otmp->next;
 		}
 		ltmp = ltmp->next;

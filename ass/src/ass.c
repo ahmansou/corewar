@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:15:53 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/02 11:24:52 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:57:17 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int ass(char *filename, t_ass_env *env)
 	while (ltmp)
 	{
 		tmp += skip_ws(tmp);
-		if (ltmp->line[0] == '#')
+		if (ltmp->line[0] == '#' || ltmp->line[0] == ';')
 		{
 			ltmp = ltmp->next;
 			continue ;

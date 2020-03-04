@@ -6,11 +6,11 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:24:46 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/03 15:57:48 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:27:08 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ass.h"
+#include "ass.h" 
 
 int		get_op_type(char *op)
 {
@@ -39,8 +39,7 @@ t_op	*new_op(char *op)
 		return (0);
 	new->name = ft_strdup(split[0]);
 	new->code = get_op_type(split[0]);
-	// ft_printf("ok\n");
-	if (new->code >= 1 && new->code <= 2)
+	if (new->code >= 1 && new->code <= 5)
 		if (!o_tps.t[new->code - 1](new, split))
 			return (NULL);
 	return (new);
@@ -70,15 +69,19 @@ int		get_ops(t_ass_env *env, t_lines *ltmp, t_label *clabel, int x)
 	while (ltmp)
 	{
 		ltmp->line += skip_ws(ltmp->line);
-		if (ltmp->line[0] == '#' || ltmp->line[0] == ' ' ||
-			ltmp->line[0] == '\t' || ltmp->line[0] == '\n')
+		if (ltmp->line[0] == '#' || ltmp->line[0] == ';' ||
+			ltmp->line[0] == ' ' || ltmp->line[0] == '\t' ||
+			ltmp->line[0] == '\n')
 		{
 			ltmp = ltmp->next;
 			continue ;
 		}
 		if (ltmp->line[0] != '\0')
 			if (!add_op(env, clabel, new_op(ltmp->line)))
+			{
+				// ft_printf("%s\n", ltmp->line);
 				return (0);
+			}
 		if (ltmp->next && is_label(ltmp->next->line))
 			break ;
 		ltmp = ltmp->next;

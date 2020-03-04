@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:59:13 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/03 15:01:17 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:27:21 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ const t_op	*get_op_tab(void)
 const t_op_types op_type = 
 {
 	// {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
-	{1, 2},
-	{&_live, &_ld}
+	{1, 2, 3, 4, 5},
+	{&_live, &_ld, &_st, &_add, &_sub}
 };
 
 t_op_types get_o_types(void)

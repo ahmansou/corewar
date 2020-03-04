@@ -6,7 +6,7 @@
 /*   By: ahmansou <ahmansou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:13:36 by ahmansou          #+#    #+#             */
-/*   Updated: 2020/03/03 16:02:09 by ahmansou         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:27:31 by ahmansou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ typedef	struct		s_lines
 	struct s_lines	*next;
 }					t_lines;
 
-// typedef struct		s_regs{
-// 	int				r1;
-// 	int				r2;
-// 	int				r3;
-// 	int				r4;
-// 	int				r5;
-// 	int				r6;
-// 	int				r7;
-// 	int				r8;
-// 	int				r9;
-// 	int				r10;
-// 	int				r11;
-// 	int				r12;
-// 	int				r13;
-// 	int				r14;
-// 	int				r15;
-// 	int				r16;
-// }					t_regs;
-
 typedef struct		s_op
 {	
 	char			*name;
@@ -63,8 +44,10 @@ typedef struct		s_op
 	char			carry;
 	char			octcode;
 	// t_regs			regs;
-	int				regs[REG_NUMBER];
+	char			*regs[REG_NUMBER];
 	int				r;
+	int				r1;
+	int				r2;
 	struct s_op		*next;
 }					t_op;
 
@@ -105,6 +88,9 @@ typedef struct		s_op_types
 t_op_types			get_o_types(void);
 int					_live(t_op *op, char **split);
 int					_ld(t_op *op, char **split);
+int					_st(t_op *op, char **split);
+int					_add(t_op *op, char **split);
+int					_sub(t_op *op, char **split);
 
 //gnl
 int 				get_lines(char *filename, t_ass_env *env);
